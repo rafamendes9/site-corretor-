@@ -204,18 +204,9 @@ export default function Page() {
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
           {[
-            "Médio Padrão",
-            "Minha Casa Minha Vida",
-            "Morar Bem",
-            "Recife",
-            "Olinda",
-            "Paulista",
-            "Camaragibe",
-            "São Lourenço",
-            "Jaboatão dos Guararapes",
-            "Cabo de Santo Agostinho",
-            "Caruaru",
-            "João Pessoa"
+            "Alto Padrão", "Médio Padrão", "Minha Casa Minha Vida", "Morar Bem",
+            "Recife", "Olinda", "Paulista", "Camaragibe", "São Lourenço",
+            "Jaboatão dos Guararapes", "Cabo de Santo Agostinho", "Caruaru", "João Pessoa"
           ].map((s) => (
             <span
               key={s}
@@ -234,30 +225,20 @@ export default function Page() {
         </div>
       </div>
 
+      {/* ===== PARTE COM A FOTO ===== */}
       <div style={{ position: "relative" }}>
-        <div
+        <img
+          src="/foto-perfil.jpg"           // ← Mude para o nome da sua foto
+          alt="Rafaell Mendes - Corretor de Imóveis"
           style={{
-            aspectRatio: "3/4",
-            background: `linear-gradient(135deg, ${C.ink} 0%, #2A3F6A 100%)`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "4px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
           }}
-        >
-          <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 48, opacity: 0.12 }}>👤</div>
-            <div
-              style={{
-                fontFamily: C.sans,
-                color: "rgba(255,255,255,0.18)",
-                fontSize: 12,
-                marginTop: 8,
-              }}
-            >
-              Adicione sua foto
-            </div>
-          </div>
-        </div>
+        />
+        
         {/* gold corner accent */}
         <div
           style={{
