@@ -210,47 +210,93 @@ export default function Page() {
       </section>
 
       {/* ── SOBRE ────────────────────────────────────────────────── */}
-      <section id="sobre" style={{ background:C.stone, padding:'90px 48px' }}>
-        <div style={{ maxWidth:880, margin:'0 auto' }}>
-          <Label text="Sobre" />
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'start' }}>
-            <div>
-              <H2>Mais do que vender imóveis — <em style={{ color:C.gold }}>construir confiança</em></H2>
-              <p style={{ fontFamily:C.sans, color:C.mid, fontSize:15, lineHeight:1.8, margin:'24px 0 32px' }}>
-                Doze anos no mercado imobiliário de Recife me ensinaram que comprar ou vender
-                um imóvel vai muito além de uma transação. Por isso, meu trabalho começa na
-                escuta ativa e termina apenas quando você está satisfeito.
-              </p>
-              <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-                {['Alto Padrão','Boa Viagem','Graças','Aflitos','Espinheiro'].map(s => (
-                  <span key={s} style={{ fontFamily:C.sans, fontSize:11, fontWeight:500,
-                    color:C.ink, border:`1px solid rgba(27,43,75,0.22)`, padding:'5px 12px' }}>
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div style={{ position:'relative' }}>
-              <div style={{
-                aspectRatio:'3/4',
-                background:`linear-gradient(135deg, ${C.ink} 0%, #2A3F6A 100%)`,
-                display:'flex', alignItems:'center', justifyContent:'center',
-              }}>
-                <div style={{ textAlign:'center' }}>
-                  <div style={{ fontSize:48, opacity:0.12 }}>👤</div>
-                  <div style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.18)', fontSize:12, marginTop:8 }}>
-                    Adicione sua foto
-                  </div>
-                </div>
-              </div>
-              {/* gold corner accent */}
-              <div style={{ position:'absolute', bottom:-14, right:-14,
-                width:70, height:70, border:`2px solid ${C.gold}` }} />
+<section id="sobre" style={{ background: C.stone, padding: "90px 48px" }}>
+  <div style={{ maxWidth: 880, margin: "0 auto" }}>
+    <Label text="Sobre" />
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+      <div>
+        <H2>
+          Mais do que vender imóveis —{" "}
+          <em style={{ color: C.gold }}>construir confiança</em>
+        </H2>
+        
+        <p style={{ fontFamily: C.sans, color: C.mid, fontSize: 15, lineHeight: 1.8, margin: "24px 0 32px" }}>
+          Vários anos no mercado imobiliário de Pernambuco me ensinaram que comprar ou vender
+          um imóvel vai muito além de uma transação. Por isso, meu trabalho começa na
+          escuta ativa e termina apenas quando você está satisfeito.
+        </p>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {[
+            "Médio Padrão",
+            "Minha Casa Minha Vida",
+            "Morar Bem",
+            "Recife",
+            "Olinda",
+            "Paulista",
+            "Camaragibe",
+            "São Lourenço",
+            "Jaboatão dos Guararapes",
+            "Cabo de Santo Agostinho",
+            "Caruaru",
+            "João Pessoa"
+          ].map((s) => (
+            <span
+              key={s}
+              style={{
+                fontFamily: C.sans,
+                fontSize: 11,
+                fontWeight: 500,
+                color: C.ink,
+                border: `1px solid rgba(27,43,75,0.22)`,
+                padding: "5px 12px",
+              }}
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ position: "relative" }}>
+        <div
+          style={{
+            aspectRatio: "3/4",
+            background: `linear-gradient(135deg, ${C.ink} 0%, #2A3F6A 100%)`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 48, opacity: 0.12 }}>👤</div>
+            <div
+              style={{
+                fontFamily: C.sans,
+                color: "rgba(255,255,255,0.18)",
+                fontSize: 12,
+                marginTop: 8,
+              }}
+            >
+              Adicione sua foto
             </div>
           </div>
         </div>
-      </section>
-
+        {/* gold corner accent */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -14,
+            right: -14,
+            width: 70,
+            height: 70,
+            border: `2px solid ${C.gold}`,
+          }}
+        />
+      </div>
+    </div>
+  </div>
+</section>
       {/* ── ESTATÍSTICAS ─────────────────────────────────────────── */}
       <section style={{ background:C.ink, padding:'90px 48px', overflow:'hidden', position:'relative' }}>
         <div style={{ maxWidth:880, margin:'0 auto', position:'relative', zIndex:1 }}>
