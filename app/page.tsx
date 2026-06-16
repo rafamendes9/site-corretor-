@@ -36,9 +36,9 @@ const DATA = {
     { status: 'VENDIDO', type: 'Apartamento 3 Quartos', local: 'Aflitos',    value: 'R$ 420.000',   days: 12 },
   ],
   testimonials: [
-    { init: 'AC', name: 'Ana & Carlos Costa',  role: 'Compradores em Boa Viagem',  quote: 'Encontramos o apartamento dos nossos sonhos em menos de duas semanas. O Ricardo nos guiou com paciência e transparência do início ao fim. Recomendamos!' },
-    { init: 'FO', name: 'Fernanda Oliveira',   role: 'Vendedora no Recife Antigo', quote: 'Vendi minha cobertura por um valor acima do que eu esperava. A estratégia de divulgação e a condução profissional fazem toda a diferença.' },
-    { init: 'MS', name: 'Marcelo Souza',       role: 'Comprador em Casa Amarela',  quote: 'Um profissional honesto e atencioso do início ao fim. Me ajudou no processo de financiamento com muita competência e dedicação.' },
+    { init: 'AC', name: 'Ana & Carlos Costa',  role: 'Compradores em Boa Viagem',  quote: 'Encontramos o apartamento dos nossos sonhos em menos de duas semanas. O Rafaell nos guiou com paciência e total transparência em cada etapa.' },
+    { init: 'FO', name: 'Fernanda Oliveira',   role: 'Vendedora no Recife Antigo', quote: 'Vendi minha cobertura por um valor acima do que eu esperava. A estratégia de divulgação e a condução das negociações foram realmente impecáveis.' },
+    { init: 'MS', name: 'Marcelo Souza',       role: 'Comprador em Casa Amarela',  quote: 'Um profissional honesto e atencioso do início ao fim. Me ajudou no processo de financiamento com muita clareza. Recomendo sem hesitar.' },
   ],
 };
 
@@ -65,7 +65,7 @@ function H2({ children, light }: { children: React.ReactNode; light?: boolean })
   );
 }
 
-// ── App ────────────────────────────────────────────────────────────────────
+// ── App ──────────────────────────────────────────────────────────────
 export default function Page() {
   const [scrolled,   setScrolled]   = useState(false);
   const [filter,     setFilter]     = useState('TODOS');
@@ -127,7 +127,7 @@ export default function Page() {
         background: scrolled ? C.ink : 'transparent', transition:'background 0.4s ease',
       }}>
         <span style={{ fontFamily:C.serif, color:C.white, fontSize:18, fontWeight:600 }}>
-          Ricardo <em style={{ color:C.gold, fontStyle:'italic' }}>Mendes</em>
+          Rafaell <em style={{ color:C.gold, fontStyle:'italic' }}>Mendes</em>
         </span>
         <div style={{ display:'flex', gap:28 }}>
           {[['Sobre','#sobre'],['Serviços','#servicos'],['Portfólio','#portfolio'],['Contato','#contato']].map(([n,h]) => (
@@ -164,13 +164,13 @@ export default function Page() {
             letterSpacing:'0.15em', textTransform:'uppercase',
           }}>
             <span style={{ width:5, height:5, borderRadius:'50%', background:C.gold, display:'block' }} />
-            CRECI-PE 12.345-F · Corretor de Imóveis
+            CRECI-PE 20711 · Corretor de Imóveis
           </div>
 
           {/* Name */}
           <div style={{ marginBottom:32 }}>
             <div style={{ fontFamily:C.serif, color:C.white, fontWeight:700, fontSize:72, lineHeight:1.0, letterSpacing:-3, marginBottom:4 }}>
-              Ricardo
+              Rafaell
             </div>
             <div style={{ fontFamily:C.serif, color:C.gold, fontWeight:400, fontSize:72, lineHeight:1.0, letterSpacing:-3, fontStyle:'italic' }}>
               Mendes
@@ -188,7 +188,7 @@ export default function Page() {
               fontSize:12, letterSpacing:'0.08em', textTransform:'uppercase',
               padding:'14px 28px', textDecoration:'none',
             }}>Ver Portfólio</a>
-            <a href="https://wa.me/5581999999999" target="_blank" rel="noopener noreferrer" style={{
+            <a href="https://wa.me/5581998148930" target="_blank" rel="noopener noreferrer" style={{
               border:'1px solid rgba(255,255,255,0.28)', color:C.white,
               fontFamily:C.sans, fontWeight:500, fontSize:12,
               letterSpacing:'0.08em', textTransform:'uppercase',
@@ -411,10 +411,10 @@ export default function Page() {
               Me chame pelo WhatsApp ou preencha o formulário. Respondo em até 2 horas em dias úteis.
             </p>
             {[
-              ['WhatsApp',  '(81) 9 9999-9999'               ],
-              ['Email',     'contato@ricardomendes.com.br'    ],
-              ['Instagram', '@ricardomendes.imoveis'          ],
-              ['CRECI',     'CRECI-PE 12.345-F'               ],
+              ['WhatsApp',  '(81) 9 98148930'               ],
+              ['Email',     'rafaellmendes.corretor@gmail.com'    ],
+              ['Instagram', '@rafaell_corretor/'          ],
+              ['CRECI',     'CRECI-PE 20711'               ],
             ].map(([k,v]) => (
               <div key={k} style={{ display:'flex', gap:20, marginBottom:14 }}>
                 <span style={{ fontFamily:C.sans, color:C.gold, fontSize:10, fontWeight:600,
@@ -456,7 +456,7 @@ export default function Page() {
       <footer style={{ background:C.inkDark, padding:'20px 48px',
         display:'flex', justifyContent:'space-between', alignItems:'center' }}>
         <span style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.25)', fontSize:11 }}>
-          © 2025 Ricardo Mendes · CRECI-PE 12.345-F
+          © 2025 Rafaell Mendes · CRECI-PE 20711
         </span>
         <span style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.25)', fontSize:11 }}>
           Recife, Pernambuco
@@ -464,14 +464,14 @@ export default function Page() {
       </footer>
 
       {/* ── WhatsApp flutuante ────────────────────────────────────── */}
-      <a href="https://wa.me/5581999999999" target="_blank" rel="noopener noreferrer" style={{
+      <a href="https://wa.me/5581998148930" target="_blank" rel="noopener noreferrer" style={{
         position:'fixed', bottom:28, right:28, zIndex:999,
         width:52, height:52, borderRadius:'50%', background:'#25D366',
         display:'flex', alignItems:'center', justifyContent:'center',
         textDecoration:'none', boxShadow:'0 4px 16px rgba(37,211,102,0.35)',
       }}>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.74-1.653-2.037-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.228 1.36.196 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.125-.272-.198-.57-.347m-5.421-7.403h-.004c-1.052 0-2.069.335-2.907.957l-.208.13-2.15-.564.574 2.076.135.213c-.659.951-1.01 2.05-1.01 3.169 0 3.007 2.448 5.455 5.455 5.455 1.45 0 2.82-.558 3.844-1.573 1.024-1.015 1.587-2.368 1.587-3.882 0-3.007-2.448-5.455-5.455-5.455" />
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.465-1.653-1.764-.173-.299-.09-.579.083-.767.173-.188.385-.49.578-.735.192-.245.256-.42.386-.686.13-.266.065-.498-.033-.697-.098-.199-.862-2.066-1.183-2.826-.311-.735-.624-.735-.862-.747-.223-.01-.479-.01-.735-.01-.256 0-.67.096-.102.596-.432 1.331-.432 3.101 0 4.432.432.9 1.877 2.885 4.547 4.024 2.669 1.14 5.092.968 6.018.823.9-.145 2.764-.574 3.156-1.129.392-.555.392-1.03.274-1.129-.118-.099-.431-.149-.898-.257z"/>
         </svg>
       </a>
 
