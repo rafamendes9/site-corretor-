@@ -36,7 +36,7 @@ const DATA = {
     { status: "VENDIDO", type: "Apartamento 3 Quartos", local: "Aflitos",    value: "R$ 420.000",   days: 12 },
   ],
   testimonials: [
-    { init: "AC", name: "Ana & Carlos Costa",  role: "Compradores em Boa Viagem",  quote: "Encontramos o apartamento dos nossos sonhos em menos de duas semanas. O Ricardo nos guiou com paciência e total transparência em cada etapa."                           },
+    { init: "AC", name: "Ana & Carlos Costa",  role: "Compradores em Boa Viagem",  quote: "Encontramos o apartamento dos nossos sonhos em menos de duas semanas. O Rafaell nos guiou com paciência e total transparência em cada etapa."                           },
     { init: "FO", name: "Fernanda Oliveira",   role: "Vendedora no Recife Antigo", quote: "Vendi minha cobertura por um valor acima do que eu esperava. A estratégia de divulgação e a condução das negociações foram realmente impecáveis."                       },
     { init: "MS", name: "Marcelo Souza",       role: "Comprador em Casa Amarela",  quote: "Um profissional honesto e atencioso do início ao fim. Me ajudou no processo de financiamento com muita clareza. Recomendo sem hesitar."                                 },
   ],
@@ -126,7 +126,7 @@ export default function Page() {
         background: scrolled ? C.ink : "transparent", transition:"background 0.4s ease",
       }}>
         <span style={{ fontFamily:C.serif, color:C.white, fontSize:18, fontWeight:600 }}>
-          Ricardo <em style={{ color:C.gold, fontStyle:"italic" }}>Mendes</em>
+          Rafaell <em style={{ color:C.gold, fontStyle:"italic" }}>Mendes</em>
         </span>
         <div style={{ display:"flex", gap:28 }}>
           {[["Sobre","#sobre"],["Serviços","#servicos"],["Portfólio","#portfolio"],["Contato","#contato"]].map(([n,h]) => (
@@ -163,13 +163,13 @@ export default function Page() {
             letterSpacing:"0.15em", textTransform:"uppercase",
           }}>
             <span style={{ width:5, height:5, borderRadius:"50%", background:C.gold, display:"block" }} />
-            CRECI-PE 12.345-F · Corretor de Imóveis
+            CRECI-PE 20711 · Corretor de Imóveis
           </div>
 
           {/* Name */}
           <div style={{ marginBottom:32 }}>
             <div style={{ fontFamily:C.serif, color:C.white, fontWeight:700, fontSize:72, lineHeight:1.0, letterSpacing:-3, marginBottom:4 }}>
-              Ricardo
+              Rafaell
             </div>
             <div style={{ fontFamily:C.serif, color:C.gold, fontWeight:400, fontSize:72, lineHeight:1.0, letterSpacing:-3, fontStyle:"italic" }}>
               Mendes
@@ -187,7 +187,7 @@ export default function Page() {
               fontSize:12, letterSpacing:"0.08em", textTransform:"uppercase",
               padding:"14px 28px", textDecoration:"none",
             }}>Ver Portfólio</a>
-            <a href="https://wa.me/5581999999999" target="_blank" rel="noopener noreferrer" style={{
+            <a href="https://wa.me/5581998148930" target="_blank" rel="noopener noreferrer" style={{
               border:"1px solid rgba(255,255,255,0.28)", color:C.white,
               fontFamily:C.sans, fontWeight:500, fontSize:12,
               letterSpacing:"0.08em", textTransform:"uppercase",
@@ -412,10 +412,10 @@ export default function Page() {
               Me chame pelo WhatsApp ou preencha o formulário. Respondo em até 2 horas em dias úteis.
             </p>
             {[
-              ["WhatsApp",  "(81) 9 9999-9999"               ],
-              ["Email",     "contato@ricardomendes.com.br"    ],
-              ["Instagram", "@ricardomendes.imoveis"          ],
-              ["CRECI",     "CRECI-PE 12.345-F"               ],
+              ["WhatsApp",  "(81) 9 98148930"               ],
+              ["Email",     "rafaellmendes.corretor@gmail.com"    ],
+              ["Instagram", "@rafaell_corretor/"          ],
+              ["CRECI",     "CRECI-PE 20711"               ],
             ].map(([k,v]) => (
               <div key={k} style={{ display:"flex", gap:20, marginBottom:14 }}>
                 <span style={{ fontFamily:C.sans, color:C.gold, fontSize:10, fontWeight:600,
@@ -457,7 +457,7 @@ export default function Page() {
       <footer style={{ background:C.inkDark, padding:"20px 48px",
         display:"flex", justifyContent:"space-between", alignItems:"center" }}>
         <span style={{ fontFamily:C.sans, color:"rgba(255,255,255,0.25)", fontSize:11 }}>
-          © 2025 Ricardo Mendes · CRECI-PE 12.345-F
+          © 2025 Rafaell Mendes · CRECI-PE 20711
         </span>
         <span style={{ fontFamily:C.sans, color:"rgba(255,255,255,0.25)", fontSize:11 }}>
           Recife, Pernambuco
@@ -465,7 +465,7 @@ export default function Page() {
       </footer>
 
       {/* ── WhatsApp flutuante ────────────────────────────────────── */}
-      <a href="https://wa.me/5581999999999" target="_blank" rel="noopener noreferrer" style={{
+      <a href="https://wa.me/5581998148930" target="_blank" rel="noopener noreferrer" style={{
         position:"fixed", bottom:28, right:28, zIndex:999,
         width:52, height:52, borderRadius:"50%", background:"#25D366",
         display:"flex", alignItems:"center", justifyContent:"center",
