@@ -70,8 +70,6 @@ export default function Page() {
   const [scrolled,   setScrolled]   = useState(false);
   const [filter,     setFilter]     = useState('TODOS');
   const [activeTest, setActiveTest] = useState(0);
-  const [form,       setForm]       = useState({ name:'', phone:'', message:'' });
-  const [sent,       setSent]       = useState(false);
 
   useEffect(() => {
     // Google Fonts
@@ -94,28 +92,6 @@ export default function Page() {
     : DATA.portfolio.filter(p => p.status === filter);
 
   const t = DATA.testimonials[activeTest];
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    if (e && e.preventDefault) e.preventDefault();
-    try {
-      // Substituir 'yourFormId' pelo seu ID do Formspree
-      const res = await fetch('https://formspree.io/f/xyzabc123', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) setSent(true);
-      else alert('Erro ao enviar mensagem.');
-    } catch (err) {
-      alert('Erro ao enviar mensagem.');
-    }
-  };
-
-  const fieldStyle: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
-    color: C.white, padding: '13px 16px', fontFamily: C.sans, fontSize: 14,
-    outline: 'none', width: '100%', boxSizing: 'border-box',
-  };
 
   return (
     <div style={{ background:C.cream }}>
@@ -403,7 +379,7 @@ export default function Page() {
 
       {/* ── CONTATO ──────────────────────────────────────────────── */}
       <section id="contato" style={{ background:C.ink, padding:'90px 48px' }}>
-        <div style={{ maxWidth:880, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:64 }}>
+        <div style={{ maxWidth:880, margin:'0 auto' }}>
           <div>
             <Label text="Vamos conversar" />
             <H2 light>Pronto para o próximo passo?</H2>
@@ -422,32 +398,6 @@ export default function Page() {
                 <span style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.75)', fontSize:14 }}>{v}</span>
               </div>
             ))}
-          </div>
-
-          <div>
-            {sent ? (
-              <div style={{ height:'100%', display:'flex', flexDirection:'column', alignItems:'center',
-                justifyContent:'center', textAlign:'center', background:'rgba(255,255,255,0.04)', padding:40 }}>
-                <div style={{ fontFamily:C.serif, color:C.gold, fontSize:48, marginBottom:16 }}>✓</div>
-                <div style={{ fontFamily:C.serif, color:C.white, fontSize:22, marginBottom:8 }}>Mensagem enviada!</div>
-                <div style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.5)', fontSize:13 }}>Entrarei em contato em breve.</div>
-              </div>
-            ) : (
-              <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-                <input type="text" placeholder="Nome completo" value={form.name}
-                  onChange={e => setForm({...form, name:e.target.value})} style={fieldStyle} />
-                <input type="tel" placeholder="WhatsApp" value={form.phone}
-                  onChange={e => setForm({...form, phone:e.target.value})} style={fieldStyle} />
-                <textarea placeholder="O que você está procurando?" rows={5} value={form.message}
-                  onChange={e => setForm({...form, message:e.target.value})}
-                  style={{ ...fieldStyle, resize:'vertical' }} />
-                <button onClick={handleSubmit} style={{
-                  background:C.gold, color:C.ink, fontFamily:C.sans, fontWeight:700,
-                  fontSize:12, letterSpacing:'0.1em', textTransform:'uppercase',
-                  padding:15, border:'none', cursor:'pointer', marginTop:4,
-                }}>Enviar Mensagem</button>
-              </div>
-            )}
           </div>
         </div>
       </section>
