@@ -448,7 +448,7 @@ export default function Page() {
       <Label text="Vamos conversar" />
       <H2 light>Pronto para o próximo passo?</H2>
       <p style={{ fontFamily: C.sans, color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.7, margin: "24px 0 40px" }}>
-        Me chame pelo WhatsApp para um contato, formulario destinado exclusivamente para solicitações legais vinculadas ao site.
+        Me chame pelo WhatsApp para um contato rapido, formulario destinado exclusivamente para solicitações legais vinculadas ao site.
       </p>
 
       {[
