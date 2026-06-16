@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://site-corretor-eight.vercel.app',
+    url: 'https://rafaellcorretor.vercel.app',
     title: 'Rafaell Mendes - Corretor de Imóveis Recife',
     description: 'Especialista em imóveis em Recife - Venda, locação e consultoria',
     images: [
       {
-        url: 'https://site-corretor-eight.vercel.app/og-image.jpg',
+        url: 'https://rafaellcorretor.vercel.app/og-image.jpg',
         width: 1200,
         height: 630,
       },
