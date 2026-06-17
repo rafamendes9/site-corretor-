@@ -42,7 +42,7 @@ const DATA = {
   ],
 };
 
-// ── Estilos ────────────────────────────────────────────────────────────────
+// ── Estilos ───────────────────────────────────────────────────────────
 const fieldStyle = {
   fontFamily: C.sans,
   fontSize: 14,
@@ -52,6 +52,14 @@ const fieldStyle = {
   color: '#FFFFFF',
   fontWeight: 500,
 };
+
+// ── Função para calcular padding responsivo ──
+const getPadding = (isMobile: boolean) => isMobile ? '20px 16px' : '90px 48px';
+const getNavPadding = (isMobile: boolean) => isMobile ? '0 16px' : '0 48px';
+const getMaxWidth = (isMobile: boolean) => isMobile ? '100%' : 880;
+const getGap = (isMobile: boolean) => isMobile ? 16 : 48;
+const getNavGap = (isMobile: boolean) => isMobile ? 12 : 28;
+const getNavFontSize = (isMobile: boolean) => isMobile ? 9 : 11;
 
 // ── Sub-componentes ────────────────────────────────────────────────────────
 function Label({ text }: { text: string }) {
@@ -66,9 +74,9 @@ function Label({ text }: { text: string }) {
   );
 }
 
-function H2({ children, light }: { children: React.ReactNode; light?: boolean }) {
+function H2({ children, light, isMobile }: { children: React.ReactNode; light?: boolean; isMobile: boolean }) {
   return (
-    <h2 style={{ fontFamily:C.serif, fontWeight:600, fontSize:34,
+    <h2 style={{ fontFamily:C.serif, fontWeight:600, fontSize: isMobile ? 26 : 34,
       lineHeight:1.2, margin:0, letterSpacing:'-0.5px',
       color: light ? C.white : C.ink }}>
       {children}
@@ -81,6 +89,7 @@ export default function Page() {
   const [scrolled,   setScrolled]   = useState(false);
   const [filter,     setFilter]     = useState('TODOS');
   const [activeTest, setActiveTest] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
   // ESTES TRÊS são obrigatórios para o formulário funcionar:
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
@@ -115,10 +124,16 @@ export default function Page() {
     document.head.appendChild(link);
     document.body.style.cssText = 'margin:0;padding:0;overflow-x:hidden;background:#FAFAF8;';
 
+    // Detectar mobile
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', checkMobile);
       try { document.head.removeChild(link); } catch(e) {}
     };
   }, []);
@@ -134,19 +149,22 @@ export default function Page() {
 
       {/* ── NAV ─────────────────────────────────────────────────── */}
       <nav style={{
-        position:'fixed', top:0, left:0, right:0, zIndex:999, height:60,
-        display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 48px',
+        position:'fixed', top:0, left:0, right:0, zIndex:999, height: isMobile ? 56 : 60,
+        display:'flex', alignItems:'center', justifyContent:'space-between', 
+        padding: getNavPadding(isMobile),
         background: scrolled ? C.ink : 'transparent', transition:'background 0.4s ease',
+        flexWrap: isMobile ? 'wrap' : 'nowrap',
       }}>
-        <span style={{ fontFamily:C.serif, color:C.white, fontSize:18, fontWeight:600 }}>
+        <span style={{ fontFamily:C.serif, color:C.white, fontSize: isMobile ? 16 : 18, fontWeight:600 }}>
           Rafaell <em style={{ color:C.gold, fontStyle:'italic' }}>Mendes</em>
         </span>
-        <div style={{ display:'flex', gap:28 }}>
+        <div style={{ display:'flex', gap: getNavGap(isMobile), flexWrap: 'wrap' }}>
           {[['Sobre','#sobre'],['Serviços','#servicos'],['Portfólio','#portfolio'],['Contato','#contato']].map(([n,h]) => (
             <a key={n} href={h} style={{
-              fontFamily:C.sans, fontSize:11, fontWeight:500,
+              fontFamily:C.sans, fontSize: getNavFontSize(isMobile), fontWeight:500,
               color:'rgba(255,255,255,0.8)', textDecoration:'none',
               letterSpacing:'0.1em', textTransform:'uppercase',
+              whiteSpace: 'nowrap',
             }}>{n}</a>
           ))}
         </div>
@@ -154,7 +172,7 @@ export default function Page() {
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section style={{
-        background:C.ink, minHeight:'100vh', padding:'80px 48px',
+        background:C.ink, minHeight:'100vh', padding: isMobile ? '80px 20px 40px' : '80px 48px',
         display:'flex', alignItems:'center', position:'relative', overflow:'hidden',
       }}>
         {/* vertical gold line */}
@@ -163,17 +181,18 @@ export default function Page() {
         {/* ghost initials */}
         <div style={{
           position:'absolute', right:-30, bottom:-60, fontFamily:C.serif,
-          fontSize:280, fontWeight:700, color:'rgba(255,255,255,0.025)', lineHeight:1,
+          fontSize: isMobile ? 140 : 280, fontWeight:700, color:'rgba(255,255,255,0.025)', lineHeight:1,
           pointerEvents:'none', userSelect:'none', letterSpacing:-8,
         }}>RM</div>
 
-        <div style={{ position:'relative', zIndex:1, maxWidth:600 }}>
+        <div style={{ position:'relative', zIndex:1, maxWidth: isMobile ? '100%' : 600 }}>
           {/* CRECI pill */}
           <div style={{
             display:'inline-flex', alignItems:'center', gap:8, marginBottom:36,
             border:'1px solid rgba(184,149,58,0.4)', padding:'5px 14px',
             fontFamily:C.sans, fontSize:10, color:C.gold, fontWeight:600,
             letterSpacing:'0.15em', textTransform:'uppercase',
+            flexWrap: 'wrap',
           }}>
             <span style={{ width:5, height:5, borderRadius:'50%', background:C.gold, display:'block' }} />
             CRECI-PE 20711 · Corretor de Imóveis
@@ -181,15 +200,15 @@ export default function Page() {
 
           {/* Name */}
           <div style={{ marginBottom:32 }}>
-            <div style={{ fontFamily:C.serif, color:C.white, fontWeight:700, fontSize:72, lineHeight:1.0, letterSpacing:-3, marginBottom:4 }}>
+            <div style={{ fontFamily:C.serif, color:C.white, fontWeight:700, fontSize: isMobile ? 48 : 72, lineHeight:1.0, letterSpacing:-3, marginBottom:4 }}>
               Rafaell
             </div>
-            <div style={{ fontFamily:C.serif, color:C.gold, fontWeight:400, fontSize:72, lineHeight:1.0, letterSpacing:-3, fontStyle:'italic' }}>
+            <div style={{ fontFamily:C.serif, color:C.gold, fontWeight:400, fontSize: isMobile ? 48 : 72, lineHeight:1.0, letterSpacing:-3, fontStyle:'italic' }}>
               Mendes
             </div>
           </div>
 
-          <p style={{ fontFamily:C.serif, color:'rgba(255,255,255,0.68)', fontSize:19,
+          <p style={{ fontFamily:C.serif, color:'rgba(255,255,255,0.68)', fontSize: isMobile ? 16 : 19,
             fontStyle:'italic', lineHeight:1.65, margin:'0 0 44px 0' }}>
             Cada imóvel tem uma história.<br />Deixa eu te contar a do seu.
           </p>
@@ -209,11 +228,11 @@ export default function Page() {
           </div>
 
           {/* Mini stats bar */}
-          <div style={{ display:'flex', gap:40, marginTop:72,
+          <div style={{ display:'flex', gap: isMobile ? 24 : 40, marginTop:72,
             borderTop:'1px solid rgba(255,255,255,0.1)', paddingTop:32, flexWrap:'wrap' }}>
-            {DATA.stats.slice(0,3).map((s,i) => (
+            {DATA.stats.slice(0, isMobile ? 2 : 3).map((s,i) => (
               <div key={i}>
-                <div style={{ fontFamily:C.serif, color:C.gold, fontSize:26, fontWeight:700, lineHeight:1 }}>{s.display}</div>
+                <div style={{ fontFamily:C.serif, color:C.gold, fontSize: isMobile ? 20 : 26, fontWeight:700, lineHeight:1 }}>{s.display}</div>
                 <div style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.4)', fontSize:10, letterSpacing:'0.1em', textTransform:'uppercase', marginTop:4 }}>{s.label}</div>
               </div>
             ))}
@@ -222,12 +241,12 @@ export default function Page() {
       </section>
 
       {/* ── SOBRE ────────────────────────────────────────────────── */}
-<section id="sobre" style={{ background: C.stone, padding: "90px 48px" }}>
-  <div style={{ maxWidth: 880, margin: "0 auto" }}>
+<section id="sobre" style={{ background: C.stone, padding: getPadding(isMobile) }}>
+  <div style={{ maxWidth: getMaxWidth(isMobile), margin: "0 auto", width: '100%' }}>
     <Label text="Sobre" />
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: getGap(isMobile), alignItems: "start" }}>
       <div>
-        <H2>
+        <H2 isMobile={isMobile}>
           Mais do que vender imóveis —{" "}
           <em style={{ color: C.gold }}>construir confiança</em>
         </H2>
@@ -284,6 +303,7 @@ export default function Page() {
             width: 70,
             height: 70,
             border: `2px solid ${C.gold}`,
+            display: isMobile ? 'none' : 'block',
           }}
         />
       </div>
@@ -292,23 +312,23 @@ export default function Page() {
 </section>
 
       {/* ── ESTATÍSTICAS ─────────────────────────────────────────── */}
-      <section style={{ background:C.ink, padding:'90px 48px', overflow:'hidden', position:'relative' }}>
-        <div style={{ maxWidth:880, margin:'0 auto', position:'relative', zIndex:1 }}>
+      <section style={{ background:C.ink, padding: getPadding(isMobile), overflow:'hidden', position:'relative' }}>
+        <div style={{ maxWidth: getMaxWidth(isMobile), margin:'0 auto', position:'relative', zIndex:1, width: '100%' }}>
           <Label text="Resultados em números" />
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)' }}>
             {DATA.stats.map((s,i) => (
               <div key={i} style={{
-                padding:'32px 24px 32px 0', position:'relative',
-                borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                padding: isMobile ? '20px 16px 20px 0' : '32px 24px 32px 0', position:'relative',
+                borderRight: (isMobile ? i % 2 === 0 : i < 3) ? '1px solid rgba(255,255,255,0.08)' : 'none',
               }}>
                 {/* Ghost number */}
                 <div style={{
                   position:'absolute', top:-10, left:-4, fontFamily:C.serif,
-                  fontSize:96, fontWeight:700, color:'rgba(255,255,255,0.028)',
+                  fontSize: isMobile ? 48 : 96, fontWeight:700, color:'rgba(255,255,255,0.028)',
                   lineHeight:1, whiteSpace:'nowrap', pointerEvents:'none', userSelect:'none',
                 }}>{s.raw}</div>
 
-                <div style={{ fontFamily:C.serif, color:C.gold, fontSize:36, fontWeight:700, lineHeight:1, marginBottom:10 }}>
+                <div style={{ fontFamily:C.serif, color:C.gold, fontSize: isMobile ? 24 : 36, fontWeight:700, lineHeight:1, marginBottom:10 }}>
                   {s.display}
                 </div>
                 <div style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.45)', fontSize:12 }}>
@@ -321,24 +341,24 @@ export default function Page() {
       </section>
 
       {/* ── SERVIÇOS ─────────────────────────────────────────────── */}
-      <section id="servicos" style={{ background:C.white, padding:'90px 48px' }}>
-        <div style={{ maxWidth:880, margin:'0 auto' }}>
+      <section id="servicos" style={{ background:C.white, padding: getPadding(isMobile) }}>
+        <div style={{ maxWidth: getMaxWidth(isMobile), margin:'0 auto', width: '100%' }}>
           <Label text="O que eu ofereço" />
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:48, marginBottom:48, alignItems:'end' }}>
-            <H2>Serviços completos</H2>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 2fr', gap: getGap(isMobile), marginBottom:48, alignItems:'end' }}>
+            <H2 isMobile={isMobile}>Serviços completos</H2>
             <p style={{ fontFamily:C.sans, color:C.mid, fontSize:15, lineHeight:1.7, margin:0 }}>
               Do primeiro contato até a assinatura do contrato, ofereço suporte completo
               em cada fase da sua negociação imobiliária.
             </p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:2 }}>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:2 }}>
             {DATA.services.map((s,i) => (
-              <div key={i} style={{ padding:'40px 36px', background: i%2===0 ? C.stone : C.ink }}>
+              <div key={i} style={{ padding: isMobile ? '32px 24px' : '40px 36px', background: i%2===0 ? C.stone : C.ink }}>
                 <div style={{ fontFamily:C.serif, color:C.gold, fontSize:28, fontWeight:700, opacity:0.4, marginBottom:16 }}>
                   {s.n}
                 </div>
                 <h3 style={{ fontFamily:C.serif, color: i%2===0 ? C.ink : C.white,
-                  fontSize:20, fontWeight:600, lineHeight:1.3, margin:'0 0 12px' }}>
+                  fontSize: isMobile ? 18 : 20, fontWeight:600, lineHeight:1.3, margin:'0 0 12px' }}>
                   {s.title}
                 </h3>
                 <p style={{ fontFamily:C.sans, color: i%2===0 ? C.mid : 'rgba(255,255,255,0.6)',
@@ -352,14 +372,14 @@ export default function Page() {
       </section>
 
       {/* ── PORTFÓLIO ────────────────────────────────────────────── */}
-      <section id="portfolio" style={{ background:C.stone, padding:'90px 48px' }}>
-        <div style={{ maxWidth:880, margin:'0 auto' }}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:48 }}>
+      <section id="portfolio" style={{ background:C.stone, padding: getPadding(isMobile) }}>
+        <div style={{ maxWidth: getMaxWidth(isMobile), margin:'0 auto', width: '100%' }}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', marginBottom:48, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 16 : 0 }}>
             <div>
               <Label text="Portfólio" />
-              <H2>Resultados de clientes</H2>
+              <H2 isMobile={isMobile}>Resultados de clientes</H2>
             </div>
-            <div style={{ display:'flex', gap:2 }}>
+            <div style={{ display:'flex', gap:2, flexWrap: 'wrap' }}>
               {['TODOS','VENDIDO','LOCADO'].map(f => (
                 <button key={f} onClick={() => setFilter(f)} style={{
                   fontFamily:C.sans, fontSize:10, fontWeight:600, letterSpacing:'0.1em',
@@ -371,9 +391,9 @@ export default function Page() {
             </div>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:2 }}>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:2 }}>
             {items.map((p,i) => (
-              <div key={i} style={{ background:C.white, padding:'36px' }}>
+              <div key={i} style={{ background:C.white, padding: isMobile ? '24px 20px' : '36px' }}>
                 <div style={{
                   display:'inline-block', fontFamily:C.sans, fontSize:9, fontWeight:700,
                   letterSpacing:'0.15em', textTransform:'uppercase', padding:'4px 10px', marginBottom:20,
@@ -381,15 +401,15 @@ export default function Page() {
                   background:p.status==='VENDIDO' ? '#E8F5EE'  : '#FFF0E5',
                 }}>{p.status}</div>
                 <div style={{ fontFamily:C.sans, color:C.mid, fontSize:10, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:6 }}>{p.local}</div>
-                <h3 style={{ fontFamily:C.serif, color:C.ink, fontSize:20, fontWeight:600, margin:'0 0 28px', lineHeight:1.3 }}>{p.type}</h3>
+                <h3 style={{ fontFamily:C.serif, color:C.ink, fontSize: isMobile ? 18 : 20, fontWeight:600, margin:'0 0 28px', lineHeight:1.3 }}>{p.type}</h3>
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', borderTop:`1px solid ${C.stone}`, paddingTop:20 }}>
                   <div>
                     <div style={{ fontFamily:C.sans, color:C.mid, fontSize:9, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:4 }}>Valor</div>
-                    <div style={{ fontFamily:C.serif, color:C.gold, fontSize:20, fontWeight:700 }}>{p.value}</div>
+                    <div style={{ fontFamily:C.serif, color:C.gold, fontSize: isMobile ? 16 : 20, fontWeight:700 }}>{p.value}</div>
                   </div>
                   <div style={{ textAlign:'right' }}>
                     <div style={{ fontFamily:C.sans, color:C.mid, fontSize:9, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:4 }}>No mercado</div>
-                    <div style={{ fontFamily:C.serif, color:C.ink, fontSize:20, fontWeight:600 }}>{p.days} dias</div>
+                    <div style={{ fontFamily:C.serif, color:C.ink, fontSize: isMobile ? 16 : 20, fontWeight:600 }}>{p.days} dias</div>
                   </div>
                 </div>
               </div>
@@ -399,10 +419,10 @@ export default function Page() {
       </section>
 
       {/* ── DEPOIMENTOS ──────────────────────────────────────────── */}
-      <section style={{ background:C.white, padding:'90px 48px' }}>
-        <div style={{ maxWidth:880, margin:'0 auto' }}>
+      <section style={{ background:C.white, padding: getPadding(isMobile) }}>
+        <div style={{ maxWidth: getMaxWidth(isMobile), margin:'0 auto', width: '100%' }}>
           <Label text="O que dizem os clientes" />
-          <div style={{ display:'grid', gridTemplateColumns:'200px 1fr', gap:60 }}>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '200px 1fr', gap: isMobile ? 32 : 60 }}>
             {/* selector */}
             <div>
               {DATA.testimonials.map((item,i) => (
@@ -422,8 +442,8 @@ export default function Page() {
             </div>
             {/* quote */}
             <div>
-              <div style={{ fontFamily:C.serif, color:C.gold, fontSize:96, lineHeight:0.6, marginBottom:24, opacity:0.22 }}>"</div>
-              <p style={{ fontFamily:C.serif, color:C.ink, fontSize:22, lineHeight:1.65, fontStyle:'italic', margin:'0 0 32px' }}>
+              <div style={{ fontFamily:C.serif, color:C.gold, fontSize: isMobile ? 64 : 96, lineHeight:0.6, marginBottom:24, opacity:0.22 }}>"</div>
+              <p style={{ fontFamily:C.serif, color:C.ink, fontSize: isMobile ? 18 : 22, lineHeight:1.65, fontStyle:'italic', margin:'0 0 32px' }}>
                 {t.quote}
               </p>
               <div style={{ display:'flex', alignItems:'center', gap:14 }}>
@@ -442,22 +462,22 @@ export default function Page() {
       </section>
 
       {/* ── CONTATO ──────────────────────────────────────────────── */}
-<section id="contato" style={{ background: C.ink, padding: "90px 48px" }}>
-  <div style={{ maxWidth: 880, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
+<section id="contato" style={{ background: C.ink, padding: getPadding(isMobile) }}>
+  <div style={{ maxWidth: getMaxWidth(isMobile), margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: getGap(isMobile), width: '100%' }}>
     <div>
       <Label text="Vamos conversar" />
-      <H2 light>Pronto para o próximo passo?</H2>
+      <H2 light isMobile={isMobile}>Pronto para o próximo passo?</H2>
       <p style={{ fontFamily: C.sans, color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.7, margin: "24px 0 40px" }}>
-        Me chame pelo WhatsApp para um contato rapido, formulario destinado exclusivamente para solicitações legais vinculadas ao site.
+        Me chame pelo WhatsApp ou preencha o formulário. Respondo em até 2 horas em dias úteis.
       </p>
 
       {[
         ["WhatsApp", "(81) 9 98148930", "https://wa.me/5581998148930"],
-        ["Email", "rafaellmendes.corretor@gmail.com"],
+        ["Email", "rafaellmendes.corretor@gmail.com", "mailto:rafaellmendes.corretor@gmail.com"],
         ["Instagram", "@rafaell_corretor", "https://www.instagram.com/rafaell_corretor/"],
         ["CRECI", "CRECI-PE 20711", null],
       ].map(([k, v, link]) => (
-        <div key={k} style={{ display: "flex", gap: 20, marginBottom: 14 }}>
+        <div key={k} style={{ display: "flex", gap: 20, marginBottom: 14, flexWrap: 'wrap' }}>
           <span style={{ 
             fontFamily: C.sans, 
             color: C.gold, 
@@ -526,8 +546,8 @@ export default function Page() {
 </section>
 
       {/* ── FOOTER ───────────────────────────────────────────────── */}
-      <footer style={{ background:C.inkDark, padding:'20px 48px',
-        display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+      <footer style={{ background:C.inkDark, padding: isMobile ? '16px 12px' : '20px 48px',
+        display:'flex', justifyContent:'space-between', alignItems:'center', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 12 : 0, textAlign: isMobile ? 'center' : 'left' }}>
         <span style={{ fontFamily:C.sans, color:'rgba(255,255,255,0.25)', fontSize:11 }}>
           © 2025 Rafaell Mendes · CRECI-PE 20711
         </span>
@@ -538,13 +558,13 @@ export default function Page() {
 
       {/* ── WhatsApp flutuante ────────────────────────────────────── */}
       <a href="https://wa.me/5581998148930" target="_blank" rel="noopener noreferrer" style={{
-        position:'fixed', bottom:28, right:28, zIndex:999,
+        position:'fixed', bottom: isMobile ? 20 : 28, right: isMobile ? 20 : 28, zIndex:999,
         width:52, height:52, borderRadius:'50%', background:'#25D366',
         display:'flex', alignItems:'center', justifyContent:'center',
         textDecoration:'none', boxShadow:'0 4px 16px rgba(37,211,102,0.35)',
       }}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
         </svg>
       </a>
 
