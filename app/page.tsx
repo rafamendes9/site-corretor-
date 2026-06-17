@@ -473,7 +473,7 @@ export default function Page() {
 
       {[
         ["WhatsApp", "(81) 9 98148930", "https://wa.me/5581998148930"],
-        ["Email", "rafaellmendes.corretor@gmail.com", "mailto:rafaellmendes.corretor@gmail.com"],
+        ["Email", "rafaellmendes.corretor@gmail.com"],
         ["Instagram", "@rafaell_corretor", "https://www.instagram.com/rafaell_corretor/"],
         ["CRECI", "CRECI-PE 20711", null],
       ].map(([k, v, link]) => (
