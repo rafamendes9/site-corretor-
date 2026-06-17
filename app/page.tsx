@@ -468,7 +468,7 @@ export default function Page() {
       <Label text="Vamos conversar" />
       <H2 light isMobile={isMobile}>Pronto para o próximo passo?</H2>
       <p style={{ fontFamily: C.sans, color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.7, margin: "24px 0 40px" }}>
-        Me chame pelo WhatsApp ou preencha o formulário. Respondo em até 2 horas em dias úteis.
+        Me chame pelo WhatsApp para atendimento personalizado, formulário de uso exclusivo para juridico relacionado ao site
       </p>
 
       {[
